@@ -1,9 +1,9 @@
 import React from "react";
 
 const Service = ({service}) => {
-    const {img, _id, name, discription} = service;
+    const {img, name, discription} = service;
   return (
-    <div className="card w-96 bg-base-100 shadow-xl text-black">
+    <div className="card lg:max-w-lg bg-base-100 shadow-xl text-black">
       <figure className="px-10 pt-10">
         <img
           src={img}
