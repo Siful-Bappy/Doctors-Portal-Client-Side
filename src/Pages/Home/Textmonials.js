@@ -30,7 +30,7 @@ const Textmonials = () => {
         },
     ]
     return (
-        <section >
+        <section  className='py-32'>
             <div className='flex justify-between'>
                 <div>
                     <h4 className="text-xl text-primary font-bold">Testimonial</h4>
