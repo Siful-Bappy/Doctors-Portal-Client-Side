@@ -10,7 +10,7 @@ const Footer = () => {
         backgroundSize: "cover",
       }}
     >
-      <div className="footer p-24">
+      <div className="footer p-24 mt-96">
         <div>
           <span className="footer-title">Services</span>
           <a className="link link-hover">Branding</a>

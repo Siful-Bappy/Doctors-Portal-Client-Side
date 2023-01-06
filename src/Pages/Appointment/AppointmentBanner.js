@@ -13,7 +13,6 @@ const AppointmentBanner = ({date, setDate}) => {
         <img src={chair} className="max-w-sm rounded-lg shadow-2xl" />
         <div>
           <DayPicker mode="single" selected={date} onSelect={setDate} />
-          <p>You picked {format(date, 'PP')}</p>
         </div>
       </div>
     </div>
