@@ -17,20 +17,13 @@ const Service = ({ service, settreatment }) => {
           {slots.length} {slots.length > 1 ? "spaces" : "space"} available
         </p>
         <div className="card-actions justify-center pt-5">
-          {/* <button
-            disabled={slots.length === 0}
-            onClick={() => settreatment(service)}
-            className="btn btn-primary w-full font-bold text-white bg-gradient-to-r from-primary to-secondary"
-          >
-            Buy Now
-          </button> */}
           <label
             htmlFor="booking-modal"
             disabled={slots.length === 0}
             onClick={() => settreatment(service)}
             className="btn btn-primary w-full font-bold text-white bg-gradient-to-r from-primary to-secondary"
           >
-            open modal
+            Book Appointment
           </label>
         </div>
       </div>
