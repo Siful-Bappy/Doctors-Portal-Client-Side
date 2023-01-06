@@ -19,7 +19,7 @@ const Info = () => {
         textDiscription={
           "66, Puraton Kalabagan Road, Jhalakati"
         }
-        color={"bg-accent"}
+        color={"bg-[#3A4256]"}
       ></InfoCard>
       <InfoCard
         img={phone}
