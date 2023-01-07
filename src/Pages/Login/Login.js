@@ -29,37 +29,73 @@ const Login = () => {
                 placeholder="Email"
                 className="input input-bordered w-full max-w-xs"
                 {...register("email", {
+                  required: {
+                    value: true,
+                    message: "Email is required",
+                  },
                   pattern: {
+                    // value: /[a-z0-9]+@[a-z]+\.[a-z]{2, 3}/,
                     value: /[A-Za-z]{3}/,
-                    message: "error message", 
+                    message: "Provide a valid Email",
                   },
                 })}
               />
               <label className="label">
-                <span className="label-text-alt">Alt label</span>
+                {errors.email?.type === "required" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.email?.message}
+                  </span>
+                )}
+                {errors.email?.type === "pattern" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.email?.message}
+                  </span>
+                )}
+              </label>
+            </div>
+            <div className="form-control w-full max-w-xs">
+              <label className="label">
+                <span className="label-text">Password</span>
+              </label>
+              <input
+                type="password"
+                placeholder="Password"
+                className="input input-bordered w-full max-w-xs"
+                {...register("password", {
+                  required: {
+                    value: true,
+                    message: "Password is required",
+                  },
+                  minLength: {
+                    value: 6,
+                    message: "Please add 8 digit or more",
+                  },
+                })}
+              />
+              <label className="label">
+                {errors.password?.type === "required" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.password?.message}
+                  </span>
+                )}
+                {errors.password?.type === "minLength" && (
+                  <span className="label-text-alt text-red-500">
+                    {errors.password?.message}
+                  </span>
+                )}
               </label>
             </div>
 
             <input
-              {...register("firstName", { required: true })}
-              aria-invalid={errors.firstName ? "true" : "false"}
+              type="submit"
+              value="Login"
+              className="btn uppercase w-full mt-3 font-bold text-white bg-gradient-to-r from-primary to-secondary"
             />
-            {errors.firstName?.type === "required" && (
-              <p role="alert">First name is required</p>
-            )}
-
-            <input
-              {...register("mail", { required: "Email Address is required" })}
-              aria-invalid={errors.mail ? "true" : "false"}
-            />
-            {errors.mail && <p role="alert">{errors.mail?.message}</p>}
-
-            <input type="submit" />
           </form>
           <div className="divider">OR</div>
           <button
             onClick={() => signInWithGoogle()}
-            className="btn btn-outline"
+            className="btn btn-outline font-bold text-white bg-gradient-to-r from-primary to-secondary"
           >
             Continue with Google
           </button>
