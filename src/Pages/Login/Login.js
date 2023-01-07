@@ -3,6 +3,7 @@ import auth from "../../firebase.init";
 import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
+import Loading from "../Shared/Loading";
 
 const Login = () => {
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
@@ -22,7 +23,7 @@ const Login = () => {
     console.log(user);
   }
   if(loading || gloading) {
-    return <button className="btn loading">loading</button>
+    return <Loading></Loading>
   }
 
   let signInError;
