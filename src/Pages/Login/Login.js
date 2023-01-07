@@ -23,13 +23,15 @@ const Login = () => {
   if (user || guser) {
     console.log(user);
   }
-  if(loading || gloading) {
-    return <Loading></Loading>
+  if (loading || gloading) {
+    return <Loading></Loading>;
   }
 
   let signInError;
-  if(error || gerror) {
-    signInError = <p className="text-red-500">{error?.message || gerror?.message}</p>
+  if (error || gerror) {
+    signInError = (
+      <p className="text-red-500">{error?.message || gerror?.message}</p>
+    );
   }
   return (
     <div className="flex justify-center items-center h-screen">
@@ -102,16 +104,21 @@ const Login = () => {
                 )}
               </label>
             </div>
-                    {
-                        signInError
-                    }
+            {signInError}
             <input
               type="submit"
               value="Login"
               className="btn uppercase w-full mt-3 font-bold text-white bg-gradient-to-r from-primary to-secondary"
             />
           </form>
-          <p><small>New to Doctors Portal? <Link to="/Signup" className="text-secondary">Create New Account</Link></small></p>
+          <p>
+            <small>
+              New to Doctors Portal?{" "}
+              <Link to="/signup" className="text-secondary">
+                Create New Account
+              </Link>
+            </small>
+          </p>
           <div className="divider">OR</div>
           <button
             onClick={() => signInWithGoogle()}
