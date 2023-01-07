@@ -4,6 +4,7 @@ import { useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import Loading from "../Shared/Loading";
+import { Link } from "react-router-dom";
 
 const Login = () => {
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
@@ -19,7 +20,7 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  if (user) {
+  if (user || guser) {
     console.log(user);
   }
   if(loading || gloading) {
@@ -110,6 +111,7 @@ const Login = () => {
               className="btn uppercase w-full mt-3 font-bold text-white bg-gradient-to-r from-primary to-secondary"
             />
           </form>
+          <p><small>New to Doctors Portal? <Link to="/Signup" className="text-secondary">Create New Account</Link></small></p>
           <div className="divider">OR</div>
           <button
             onClick={() => signInWithGoogle()}
