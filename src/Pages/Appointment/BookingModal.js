@@ -54,7 +54,7 @@ const BookingModal = ({ treatment, date, settreatment }) => {
             <input
               type="submit"
               placeholder="Type here"
-              value={"Type here"}
+              value={"Submit"}
               className="btn btn-primary w-full max-w-xs font-bold text-white bg-gradient-to-r from-primary to-secondary"
             />
           </form>
