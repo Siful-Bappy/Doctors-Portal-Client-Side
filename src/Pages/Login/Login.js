@@ -1,18 +1,23 @@
 import React from "react";
 import auth from "../../firebase.init";
-import { useSignInWithGoogle } from "react-firebase-hooks/auth";
+import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import Loading from "../Shared/Loading";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
-  const [signInWithEmailAndPassword, user, loading, error] =
+  const location = useLocation();
+  let from = location.state?.from?.pathname || "/";
+  console.log(from);
+
+  const [signInWithEmailAndPassword, loading, error] =
     useSignInWithEmailAndPassword(auth);
+    const [user] = useAuthState(auth);
     const navigate = useNavigate();
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     signInWithEmailAndPassword(data.email, data.password);
     navigate("/appointment")
   };
@@ -23,6 +28,7 @@ const Login = () => {
     handleSubmit,
   } = useForm();
   if (user || guser) {
+    navigate(from, { replace: true });
     console.log(user);
   }
   if (loading || gloading) {
