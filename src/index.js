@@ -1,30 +1,30 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
 import {
   BrowserRouter,
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+import {
+  QueryClient,
+  QueryClientProvider,
+} from "react-query";
+import { getTodos, postTodo } from "../my-api";
 
-// const router = createBrowserRouter([
-//   {
-//     path: "/",
-//     element: <App></App>,
-//   },
-// ]);
-
-const root = ReactDOM.createRoot(document.getElementById('root'));
+const root = ReactDOM.createRoot(document.getElementById("root"));
+const queryClient = new QueryClient();
 root.render(
   <React.StrictMode>
     {/* <RouterProvider router={router}>
     </RouterProvider> */}
-    
-    <BrowserRouter>
-    <App></App>
-    </BrowserRouter>
+    <QueryClientProvider client={queryClient}>
+      <BrowserRouter>
+        <App></App>
+      </BrowserRouter>
+    </QueryClientProvider>
   </React.StrictMode>
 );
 
