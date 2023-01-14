@@ -7,11 +7,12 @@ const BookingModal = ({ treatment, date, settreatment }) => {
   const { _id, name, slots } = treatment;
   const [user] = useAuthState(auth);
   const formatedDate = format(date, "PP");
+  // console.log(formatedDate);
 
   const handleBooking = (event) => {
     event.preventDefault();
     const slot = event.target.slot.value;
-    
+
     const booking = {
       treatmentId: _id,
       treatment: name,
@@ -21,6 +22,15 @@ const BookingModal = ({ treatment, date, settreatment }) => {
       patientName: user.displayName,
       phone: event.target.phone.value,
     }
+
+    fetch("http://localhost:5000/booking", {
+      method: "POST",
+      headers: { 'Content-Type': 'application/json'},
+      body: JSON.stringify(booking)
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+
     settreatment(null)
   }
   return (
