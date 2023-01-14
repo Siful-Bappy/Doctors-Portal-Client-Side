@@ -29,6 +29,9 @@ const Navbar = () => {
       <li>
         <Link to="/about">About</Link>
       </li>
+      {
+        user && <button> <Link to="/dashboard">Dashboard</Link></button>
+      }
       <li>
         {
           user ? <button onClick={async() => {
