@@ -24,7 +24,7 @@ const MyAppointment = () => {
         <table className="table w-full">
           <thead>
             <tr>
-              <th></th>
+              <th>Index</th>
               <th>Name</th>
               <th>Date</th>
               <th>Time</th>
@@ -34,7 +34,7 @@ const MyAppointment = () => {
           <tbody>
             {
                 appointments.map(appointment => (<tr>
-                    <th>1</th>
+                    <th>{(appointments.indexOf(appointment)) + 1}</th>
                     <td>{appointment.patient}</td>
                     <td>{appointment.date}</td>
                     <td>{appointment.slot}</td>
