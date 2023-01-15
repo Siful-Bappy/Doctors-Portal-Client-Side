@@ -31,9 +31,13 @@ const SignUp = () => {
   } = useForm();
 
   const [token] = useToken(user || guser);
-  if (user || guser) {
+  if (token) {
     // console.log(user);
+    navigate("/appointment")
   }
+  // if (user || guser) {
+    // console.log(user);
+  // }
   if (loading || gloading || updating) {
     return <Loading></Loading>;
   }
