@@ -1,21 +1,25 @@
-import React from "react";
+import React, { useEffect } from "react";
 import auth from "../../firebase.init";
 import { useAuthState, useSignInWithGoogle } from "react-firebase-hooks/auth";
 import { useForm } from "react-hook-form";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import Loading from "../Shared/Loading";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+import useToken from "../../hooks/useTooken";
 
 const Login = () => {
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
+  const [user] = useAuthState(auth);
+  const [token] = useToken(user || guser);
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
   // console.log(from);
 
   const [signInWithEmailAndPassword, loading, error] =
     useSignInWithEmailAndPassword(auth);
-    const [user] = useAuthState(auth);
+    
     const navigate = useNavigate();
+    
   const onSubmit = (data) => {
     // console.log(data);
     signInWithEmailAndPassword(data.email, data.password);
@@ -27,10 +31,15 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  if (user || guser) {
-    navigate(from, { replace: true });
-    console.log(user);
-  }
+  useEffect(() => {
+    if (token) {
+      navigate(from, { replace: true });
+    }
+  }, [token, from, navigate])
+  // if (user || guser) {
+  //   navigate(from, { replace: true });
+  //   console.log(user);
+  // }
   if (loading || gloading) {
     return <Loading></Loading>;
   }

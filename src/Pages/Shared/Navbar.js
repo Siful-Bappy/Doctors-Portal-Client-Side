@@ -10,6 +10,7 @@ const Navbar = () => {
   if(loading) {
     return <Loading></Loading>
   }
+  
 
   const manuItem = (
     <>
