@@ -8,7 +8,6 @@ import {
   useUpdateProfile,
 } from "react-firebase-hooks/auth";
 import auth from "../../firebase.init";
-import { async } from "@firebase/util";
 import useToken from "../../hooks/useTooken";
 
 const SignUp = () => {

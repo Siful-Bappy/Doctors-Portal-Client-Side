@@ -10,7 +10,10 @@ const Navbar = () => {
   if(loading) {
     return <Loading></Loading>
   }
-  
+  const logout = () => {
+    signOut(auth);
+    localStorage.removeItem("accessToken");
+  }
 
   const manuItem = (
     <>
@@ -35,9 +38,10 @@ const Navbar = () => {
       }
       <li>
         {
-          user ? <button onClick={async() => {
-            await signOut()
-          }}>Signout</button>
+          user ? <button onClick={logout}>Signout</button>
+          // user ? <button onClick={async() => {
+          //   await signOut()
+          // }}>Signout</button>
           :
            <Link to="/login">Login</Link>
         }

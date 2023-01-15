@@ -5,12 +5,12 @@ import { useForm } from "react-hook-form";
 import { useSignInWithEmailAndPassword } from "react-firebase-hooks/auth";
 import Loading from "../Shared/Loading";
 import { Link, useLocation, useNavigate } from "react-router-dom";
+// import useToken from "../../hooks/useTooken";
 import useToken from "../../hooks/useTooken";
 
 const Login = () => {
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
-  const [user] = useAuthState(auth);
-  const [token] = useToken(user || guser);
+  const [user, userloading] = useAuthState(auth);
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
   // console.log(from);
@@ -21,7 +21,6 @@ const Login = () => {
     const navigate = useNavigate();
     
   const onSubmit = (data) => {
-    // console.log(data);
     signInWithEmailAndPassword(data.email, data.password);
     navigate("/appointment")
   };
@@ -31,16 +30,19 @@ const Login = () => {
     formState: { errors },
     handleSubmit,
   } = useForm();
-  useEffect(() => {
+  // const [token] = useToken(user || guser);
+  const [token] = useToken(user || guser);
+  console.log(token);
+  useEffect( () =>{
     if (token) {
-      navigate(from, { replace: true });
+        navigate(from, { replace: true });
     }
-  }, [token, from, navigate])
+}, [token, from, navigate])
   // if (user || guser) {
   //   navigate(from, { replace: true });
   //   console.log(user);
   // }
-  if (loading || gloading) {
+  if (loading || gloading || userloading) {
     return <Loading></Loading>;
   }
 
