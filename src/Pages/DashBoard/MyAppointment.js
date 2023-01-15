@@ -16,7 +16,7 @@ const MyAppointment = () => {
   if (loading) {
     return <Loading></Loading>;
   }
-  console.log(user);
+  // console.log(user);
   return (
     <div className="">
       <h2 className="mt-4 text-xl text-center">My Appointment: {appointments.length}</h2>

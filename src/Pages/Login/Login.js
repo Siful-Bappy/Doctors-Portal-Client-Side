@@ -10,7 +10,7 @@ const Login = () => {
   const [signInWithGoogle, guser, gloading, gerror] = useSignInWithGoogle(auth);
   const location = useLocation();
   let from = location.state?.from?.pathname || "/";
-  console.log(from);
+  // console.log(from);
 
   const [signInWithEmailAndPassword, loading, error] =
     useSignInWithEmailAndPassword(auth);
