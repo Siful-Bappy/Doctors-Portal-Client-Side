@@ -17,7 +17,7 @@ const Info = () => {
         img={marker}
         text={"Visit our location"}
         textDiscription={
-          "66, Puraton Kalabagan Road, Jhalakati"
+          "66, Puraton Kalabagan, Jhalakati"
         }
         color={"bg-[#3A4256]"}
       ></InfoCard>

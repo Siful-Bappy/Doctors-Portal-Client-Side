@@ -1,14 +1,31 @@
 import React from "react";
+import { toast } from "react-toastify";
 
-const UserRow = ({user, index}) => {
+const UserRow = ({user, index, refetch}) => {
     console.log(user);
-    const {email} = user;
+    const {email, role} = user;
+    const makeAdmin = () => {
+      fetch(`http://localhost:5000/user/admin/${email}`, {
+        method: "PUT",
+        headers: {
+          authorization: `Bearer ${localStorage.getItem("accessToken")}`,
+        }
+      })
+      .then(res => res.json())
+      .then(data => {
+        
+        refetch();
+        toast.success(`Successfully made and admin`)
+      })
+    }
   return (
     <tr>
       <th>{index + 1}</th>
       <td>{email}</td>
-      <td>Quality Control Specialist</td>
-      <td>Blue</td>
+      <td>{
+        role !== "admin" && <button className="btn btn-xs" onClick={makeAdmin}>Make Admin</button>
+        }</td>
+      <td><button className="btn btn-xs">Remove User</button></td>
     </tr>
   );
 };
