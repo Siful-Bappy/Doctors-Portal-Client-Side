@@ -1,10 +1,11 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 import { useQueries, useQuery } from "react-query";
+import { toast } from "react-toastify";
 import Loading from "../Shared/Loading";
 
 const AddDoctors = () => {
-    /*
+  /*
     3 ways to store images
     1. third party stroge like imagebb
     2. your own stronge in your own server
@@ -17,6 +18,7 @@ const AddDoctors = () => {
     register,
     formState: { errors },
     handleSubmit,
+    reset
   } = useForm();
   const { data: services, isLoading } = useQuery("services", () =>
     fetch("http://localhost:5000/service").then((res) => res.json())
@@ -30,27 +32,42 @@ const AddDoctors = () => {
   const onSubmit = async (data) => {
     // console.log(data);
     const image = data.image[0];
-        const formData = new FormData();
-        formData.append('image', image);
-        const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
-        fetch(url, {
-            method: 'POST',
-            body: formData
-        })
-    .then(res => res.json())
-    .then(result => {
-        if(result) {
-            const img = result.data.url;
-            const doctor = {
-                name: data.name,
-                email: data.email,
-                specialty: data.specialty,
-                img: img
-            }
-            // send to database
-        }
-        console.log(result)
+    const formData = new FormData();
+    formData.append("image", image);
+    const url = `https://api.imgbb.com/1/upload?key=${imageStorageKey}`;
+    fetch(url, {
+      method: "POST",
+      body: formData,
     })
+      .then((res) => res.json())
+      .then((result) => {
+        if (result) {
+          const img = result.data.url;
+          const doctor = {
+            name: data.name,
+            email: data.email,
+            specialty: data.specialty,
+            img: img,
+          };
+          // send to database
+          fetch("http://localhost:5000/doctor", {
+            method: "POST",
+            headers: { "content-type": "application/json" },
+            body: JSON.stringify(doctor),
+          })
+            .then((res) => res.json())
+            .then((inserted) => {
+                if(inserted) {
+                    toast.success("Doctors information created successfully")
+                    reset();
+                } else {
+                    toast.error("Fail to add a doctor")
+                }
+              console.log(inserted);
+            });
+        }
+        console.log(result);
+      });
   };
   return (
     <div>
@@ -117,10 +134,7 @@ const AddDoctors = () => {
           <label className="label">
             <span className="label-text">Specialty</span>
           </label>
-          <select
-            {...register("specialty")}
-            className="select w-full max-w-xs"
-          >
+          <select {...register("specialty")} className="select w-full max-w-xs">
             <option disabled selected>
               Pick your favorite Simpson
             </option>
