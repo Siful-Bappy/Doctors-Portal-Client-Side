@@ -12,7 +12,7 @@ const AddDoctors = () => {
     3. Datatbase: Mongodb
 
     for validation a image
-    YUP: to falidate file: search: YUP file validaton for react hook form + limit the size: 
+    YUP: to filedate file: search: YUP file validaton for react hook form + limit the size: 
     */
   const {
     register,
